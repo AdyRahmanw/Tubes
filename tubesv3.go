@@ -131,15 +131,15 @@ func insertionSortKendaraan(nKendaraan int, tabKendaraan *arrKendaraan) {
 	var key Kendaraan
 	
 	for i = 1; i < nKendaraan; i++ {
-		key = (*tabKendaraan)[i]
+		key = tabKendaraan[i]
 		j = i - 1
 		
-		for j >= 0 && (*tabKendaraan)[j].plat > key.plat {
-			(*tabKendaraan)[j+1] = (*tabKendaraan)[j]
+		for j >= 0 && tabKendaraan[j].plat > key.plat {
+			tabKendaraan[j+1] = tabKendaraan[j]
 			j = j - 1
 		}
 		
-		(*tabKendaraan)[j+1] = key
+		tabKendaraan[j+1] = key
 	}
 }
 
@@ -171,10 +171,10 @@ func hapusKendaraan(tab *arrKendaraan, n *int, indeks int) {
 	}
 	
 	for i = indeks; i < *n-1; i++ {
-		(*tab)[i] = (*tab)[i+1]
+		tab[i] = tab[i+1]
 	}
 	
-	(*tab)[*n-1] = Kendaraan{}
+	tab[*n-1] = Kendaraan{}
 	*n = *n - 1
 }
 
@@ -186,10 +186,10 @@ func hapusServis(tab *arrServis, n *int, indeks int) {
 	}
 	
 	for i = indeks; i < *n-1; i++ {
-		(*tab)[i] = (*tab)[i+1]
+		tab[i] = tab[i+1]
 	}
 	
-	(*tab)[*n-1] = RiwayatServis{}
+	tab[*n-1] = RiwayatServis{}
 	*n = *n - 1
 }
 
@@ -270,12 +270,11 @@ func main() {
 							if pilihanEdit >= 1 && pilihanEdit <= jumlahServis {
 								count = 0
 								indeksEdit = -1
-								for j = 0; j < nServis; j++ {
+								for j = 0; j < nServis && indeksEdit == -1; j++ {
 									if tabServis[j].platMobil == platLogin {
 										count++
 										if count == pilihanEdit {
 											indeksEdit = j
-											break
 										}
 									}
 								}
@@ -300,12 +299,11 @@ func main() {
 							if pilihanHapus >= 1 && pilihanHapus <= jumlahServis {
 								count = 0
 								indeksHapus = -1
-								for j = 0; j < nServis; j++ {
+								for j = 0; j < nServis && indeksHapus == -1; j++ {
 									if tabServis[j].platMobil == platLogin {
 										count++
 										if count == pilihanHapus {
 											indeksHapus = j
-											break
 										}
 									}
 								}
